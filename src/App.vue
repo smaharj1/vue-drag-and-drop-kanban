@@ -21,29 +21,28 @@ export default {
   data() {
     return{
       ajaxResult: [
-        '1 - yes no',
-        '2 - no yes',
-        '3 - handles: yes',
-        '4 - very good: no',
-        '5 - Very good: yes',
-        '6 - new one',
-        '7 - another one that is new' 
+        'Luka Modrić',
+        'Mario Mandžukić',
+        'Ivan Rakitić',
+        'Harry Kane',
+        'Raheem Stirling',
+        'Its coming home',
+        'Neymar',
+        'Kylian Mbappé',
+        'Antoine Griezmann'
       ],
 
       dropGroups: [
         {
           name: 'England',
-          children: [{
-            id: '1',
-            data:'1'
-          }]
+          children: []
         },
         {
           name: 'Croatia',
           children: []
         },
         {
-          name: 'Germany',
+          name: 'Brasil',
           children: []
         },
         {

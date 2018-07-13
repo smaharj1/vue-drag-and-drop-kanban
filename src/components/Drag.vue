@@ -55,7 +55,7 @@
     </div>
 
     <div class="drop-actions">
-      <button class="button" @click="saveClicked()">
+      <button class="button save" @click="saveClicked()">
         Save
       </button>
       <button class="button" @click="cancelClicked()">
@@ -262,8 +262,22 @@ export default {
 
 .drop-actions{
   text-align: center;
+  margin: 10px 0px;
 }
 
+.drop-actions button
+{
+  margin-right: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.save{
+  background: #5cdb95 !important;
+  border: none;
+
+}
 .error-original{
   background: #FF3860;
   color: white;
