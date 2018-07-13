@@ -74,28 +74,43 @@ export default {
   name: "Drag",
   components: { Container, Draggable },
   props: {
+    /** 
+     * Holds the main data list to distribute.
+    */
     originalData: {
       type: Array,
       required: true
     },
 
+    /** 
+     * Holds the drop buckets.
+    */
     dropzones: {
       type: Array,
       required: true
     },
 
+    /** 
+     * Title for the original list.
+    */
     originalTitle:{
       type: String,
       required: false,
       default: 'Original List'
     },
 
+    /** 
+     * Title for the drop buckets.
+    */
     dropzonesTitle: {
       type: String,
       required: false,
       default: 'Distribution data'
     },
 
+    /** 
+     * Error Message to give. 
+    */
     errorMessage: {
       type: String,
       required: false,
@@ -125,10 +140,21 @@ export default {
   },
 
   methods: {
+    /** 
+     * Even that runs when an item is dropped in the original list bucket.
+     * @param {Object} dropResult Holds the value of what is dropped.
+     * @public
+    */
     onDrop(dropResult){
       this.items = this.applyDrag(this.items, dropResult);
     },
 
+    /** 
+     * Runs when the card is dropped in any of the drop buckets. Handles the dropping into new bucket and 
+     * removing from original bucket.
+     * @param {String} columnId Holds the ID of the original bucket tot get the card.
+     * @param {Object} dropResult Holds the drop result.
+    */
     onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         
@@ -144,6 +170,10 @@ export default {
       }
     },
 
+    /** 
+     * Gets the card payload
+     * @param {String} Holds the ID.
+    */
     getCardPayload(id){
       let that = this;
       return function(index) {
@@ -155,6 +185,10 @@ export default {
       }
     },
 
+    /** 
+     * Same as card payload but this is only implemented in original list.
+     * @public
+    */
     getOriginalCardPayload(){
       let that = this;
       return function(index){
@@ -162,6 +196,13 @@ export default {
       }
     },
 
+    /** 
+     * Applies the dragging result. It removes the item from original list and keeps it in new new list.
+     * @param {Array} arr Holds the array.
+     * @param {Object} dragResult Holds the drag information.
+     * @returns the new corrected list.
+     * @public
+    */
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
       if (removedIndex === null && addedIndex === null) return arr
@@ -184,10 +225,18 @@ export default {
       return this.items && this.items.length === 0;
     },
 
+    /** 
+     * Runs when save button is clicked. It first validates if all the items from the original list is empty.
+     * @public
+    */
     saveClicked() {
       let validated = this.validateIfOriginalEmpty();
       
       if(validated){
+        /** 
+         * @event save Emits when save is clicked so that the parent component can appropriately handle it.
+         * @type {Object} 
+        */
         this.$emit('save',this.dropGroups);
         this.notifyError = false;
       }
@@ -197,6 +246,9 @@ export default {
     },
 
     cancelClicked() {
+      /** 
+       * @event cancel Handles the cancellation.
+      */
       this.$emit("cancel");
     }
 
