@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.13",
     "vue": "^2.5.16",
     "vue-smooth-dnd": "^0.2.1"
   },
