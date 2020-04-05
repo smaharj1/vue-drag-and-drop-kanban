@@ -1,11 +1,27 @@
 {
-  "name": "drag-drop-kanban",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-drag-n-drop",
+  "version": "0.0.2",
+  "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-drag-n-drop.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-drag-n-drop.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-drag-n-drop.min.js"
+  },
+  "main": "dist/vue-drag-n-drop.umd.js",
+  "module": "dist/vue-drag-n-drop.esm.js",
+  "unpkg": "dist/vue-drag-n-drop.min.js",
+  "browser": {
+    "./sfc": "src/vue-drag-n-drop.vue"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban/issues"
   },
   "dependencies": {
     "lodash": "^4.17.13",
@@ -13,36 +29,12 @@
     "vue-smooth-dnd": "^0.2.1"
   },
   "devDependencies": {
+    "rollup": "^1.17.0",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-vue": "^5.0.1",
     "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-service": "~4.2.0",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.1.2",
     "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  }
 }

@@ -71,7 +71,7 @@ import { Container, Draggable } from "vue-smooth-dnd";
 import _ from 'lodash'
 
 export default {
-  name: "Drag",
+  name: "VueDragNDrop",
   components: { Container, Draggable },
   props: {
     /** 
@@ -251,8 +251,6 @@ export default {
       */
       this.$emit("cancel");
     }
-
-
   }
 }
 </script>

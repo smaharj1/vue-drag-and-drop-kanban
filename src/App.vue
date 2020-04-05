@@ -1,22 +1,22 @@
 <template>
   <div id="app">
-    <drag
+    <drag-drop
       :dropzones="dropGroups"
       :dropzonesTitle="'Drop Zone'"
       :originalData="ajaxResult"
       :originalTitle="'Original Data To Be distributed'"
       @save="save"
-    ></drag>
+    ></drag-drop>
   </div>
 </template>
 
 <script>
-import Drag from '@/components/Drag'
+import DragDrop from './vue-drag-n-drop.vue'
 
 export default {
   name: 'app',
   components: {
-    Drag
+    DragDrop
   },
   data() {
     return{
