@@ -1,25 +1,21 @@
-name: npm-publish
+# Name for the github action
+name: Publish Master
+
+# Trigger this action when we push to master or merge a pull-request to master
 on:
   push:
     branches:
       - master
+
+# runs the jobs
 jobs:
-  npm-publish:
-    name: npm-publish
+  build:
+    # runs on ubuntu
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@master
-    - name: Set up Node.js
-      uses: actions/setup-node@master
-      with:
-        node-version: 10.0.0
-    - name: Publish if version has been updated
-      uses: pascalgn/npm-publish-action@4f4bf159e299f65d21cd1cbd96fc5d53228036df
-      with:
-        tag_name: "v%s"
-        tag_message: "v%s"
-        commit_pattern: "^Release (\\S+)"
-      env: # More info about the environment variables in the README
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
-        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} 
+      - uses: actions/checkout@v2
+      # semantic release action from third party
+      - uses: codfish/semantic-release-action@master
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
