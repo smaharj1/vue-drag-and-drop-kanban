@@ -1,8 +1,14 @@
 {
   "name": "vue-drag-n-drop",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
   "private": false,
+  "contributors": [
+    {
+      "name": "Sujil Maharjan",
+      "url": "https://github.com/smaharj1"
+    }
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
@@ -16,6 +22,19 @@
   "browser": {
     "./sfc": "src/vue-drag-n-drop.vue"
   },
+  "keywords": [
+    "Vue",
+    "Vue.js",
+    "sortable",
+    "drag and drop",
+    "drag&drop",
+    "drag",
+    "drop",
+    "draggable",
+    "dnd",
+    "kanban",
+    "smooth-dnd"
+  ],
   "files": [
     "dist/*"
   ],
@@ -23,12 +42,16 @@
   "bugs": {
     "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban"
+  },
   "dependencies": {
     "lodash": "^4.17.13",
-    "vue": "^2.6.11",
     "vue-smooth-dnd": "^0.2.1"
   },
   "devDependencies": {
+    "vue": "^2.6.11",
     "rollup": "^1.17.0",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-commonjs": "^10.0.1",
