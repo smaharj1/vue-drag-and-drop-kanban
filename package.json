@@ -1,27 +1,50 @@
 {
   "name": "vue-drag-n-drop",
   "version": "0.0.14",
-  "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
   "private": false,
+  "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "test:unit": "vue-cli-service test:unit",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-drag-n-drop.esm.js",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-drag-n-drop.umd.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-drag-n-drop.min.js"
+  },
+  "main": "dist/vue-drag-n-drop.umd.js",
+  "module": "dist/vue-drag-n-drop.esm.js",
+  "browser": {
+    "./sfc": "src/vue-drag-n-drop.vue"
+  },
+  "unpkg": "dist/vue-drag-n-drop.min.js",
+  "files": [
+    "dist/*"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.13",
+    "vue-smooth-dnd": "^0.2.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-plugin-unit-jest": "~4.3.0",
+    "@vue/cli-service": "~4.2.0",
+    "@vue/test-utils": "1.0.0-beta.31",
+    "rollup": "^1.17.0",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-vue": "^5.0.1",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "bugs": {
+    "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban/issues"
+  },
   "contributors": [
     {
       "name": "Sujil Maharjan",
       "url": "https://github.com/smaharj1"
     }
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-drag-n-drop.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-drag-n-drop.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-drag-n-drop.min.js"
-  },
-  "main": "dist/vue-drag-n-drop.umd.js",
-  "module": "dist/vue-drag-n-drop.esm.js",
-  "unpkg": "dist/vue-drag-n-drop.min.js",
-  "browser": {
-    "./sfc": "src/vue-drag-n-drop.vue"
-  },
   "keywords": [
     "Vue",
     "Vue.js",
@@ -35,29 +58,9 @@
     "kanban",
     "smooth-dnd"
   ],
-  "files": [
-    "dist/*"
-  ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/smaharj1/vue-drag-and-drop-kanban"
-  },
-  "dependencies": {
-    "lodash": "^4.17.13",
-    "vue-smooth-dnd": "^0.2.1"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
-    "rollup": "^1.17.0",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-vue": "^5.0.1",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
   }
 }
