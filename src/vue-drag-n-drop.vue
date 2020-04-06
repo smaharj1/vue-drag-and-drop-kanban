@@ -3,8 +3,7 @@
     <h2>
       {{originalTitle}}
     </h2>
-    <div class="result-group">
-      
+    <div class="result-group"> 
         <Container 
           @drop="onDrop" 
           group-name="col"
