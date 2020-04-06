@@ -21,7 +21,7 @@ yarn add vue-drag-n-drop
 
 #### Use Case
 
-```
+``` html
 <template>
   <div id="app">
     <drag-drop
@@ -76,27 +76,3 @@ Feel free to raise an issue or create a Pull Request if you see ways that can im
 ## License
 [MIT](https://opensource.org/licenses/MIT)
 
-
-<script>
-var copy = function(target) {
-    var textArea = document.createElement('textarea')
-    textArea.setAttribute('style','width:1px;border:0;opacity:0;')
-    document.body.appendChild(textArea)
-    textArea.value = target.innerHTML
-    textArea.select()
-    document.execCommand('copy')
-    document.body.removeChild(textArea)
-}
-
-var pres = document.querySelectorAll(".comment-body > pre")
-pres.forEach(function(pre){
-  var button = document.createElement("button")
-  button.className = "btn btn-sm"
-  button.innerHTML = "copy"
-  pre.parentNode.insertBefore(button, pre)
-  button.addEventListener('click', function(e){
-    e.preventDefault()
-    copy(pre.childNodes[0])
-  })
-})
-</script>
