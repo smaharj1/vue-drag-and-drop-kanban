@@ -1,21 +1,20 @@
-# Name for the github action
-name: Publish Master
+name: NPM Publish
 
-# Trigger this action when we push to master or merge a pull-request to master
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [created]
 
-# runs the jobs
 jobs:
   build:
-    # runs on ubuntu
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # semantic release action from third party
-      - uses: codfish/semantic-release-action@master
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm install
+      - run: npm run build
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
