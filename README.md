@@ -31,6 +31,7 @@ yarn add vue-drag-n-drop
       :originalData="originalList"
       :originalTitle="'Original Data To Be distributed'"
       @save="saveClicked"
+      @cancel="cancelClicked"
     ></drag-drop>
   </div>
 </template>
