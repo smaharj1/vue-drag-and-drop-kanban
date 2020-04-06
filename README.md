@@ -1,6 +1,7 @@
 
 # vue-drag-n-drop
 ![NPM build](https://github.com/smaharj1/vue-drag-and-drop-kanban/workflows/npm-publish/badge.svg?event=push) ![](https://img.shields.io/npm/v/vue-drag-n-drop?color=blue)
+
 A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.
 
 ## Demo
