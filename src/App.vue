@@ -11,6 +11,7 @@
 </template>
 
 <script>
+/* istanbul ignore file */
 import DragDrop from './vue-drag-n-drop.vue'
 
 export default {
