@@ -57,7 +57,7 @@
       <button class="button save" @click="saveClicked()">
         Save
       </button>
-      <button class="button" @click="cancelClicked()">
+      <button class="button cancel" @click="cancelClicked()">
         Cancel
       </button>
     </div>

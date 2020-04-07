@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // Import vue component
 import VueDragNDrop from './vue-drag-n-drop.vue';
 
