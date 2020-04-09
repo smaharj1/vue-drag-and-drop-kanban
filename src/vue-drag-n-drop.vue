@@ -11,17 +11,16 @@
           :get-child-payload="getOriginalCardPayload()"
           drag-class="card-ghost"
           drop-class="card-ghost-drop">
-          <Draggable v-for="item in items" :key="item.id">
-            <div class="card">
-              <p>
-              {{item.data}}
-              </p>
-            </div>
+          <Draggable v-for="(item, iind) in items" :key="iind">
+            <slot name="dd-card" v-bind:cardData="item">
+              <div class="card">
+                <p>
+                {{item}}
+                </p>
+              </div>
+            </slot>
           </Draggable>
         </Container>
-    </div>
-    <div v-if="notifyError" class="error-original">
-      {{errorMessage}}
     </div>
     <hr>
     <h2>
@@ -41,23 +40,25 @@
           drag-class="card-ghost"
           drop-class="card-ghost-drop"
         >
-          <Draggable v-for="card in item.children" :key="card.id">
-            <div class="card">
-              <p>
-                {{card.data}}
-              </p>
-            </div>
+          <Draggable v-for="(card, cid) in item.children" :key="cid">
+            <slot name="dd-card" v-bind:cardData="card">
+              <div class="card">
+                <p>
+                  {{card}}
+                </p>
+              </div>
+            </slot>
           </Draggable>
         </Container>
 
       </div>
     </div>
 
-    <div class="drop-actions">
-      <button class="button save" @click="saveClicked()">
+    <div class="drop-actions" v-if="enableSave || enableCancel">
+      <button class="button save" v-if="enableSave" @click="saveClicked()">
         Save
       </button>
-      <button class="button cancel" @click="cancelClicked()">
+      <button class="button cancel" v-if="enableCancel" @click="cancelClicked()">
         Cancel
       </button>
     </div>
@@ -67,75 +68,30 @@
 
 <script>
 import { Container, Draggable } from "vue-smooth-dnd";
-import _ from 'lodash'
+import _ from 'lodash';
+import RequiredProps from './drag-n-drop-props.js';
 
 export default {
   name: "VueDragNDrop",
   components: { Container, Draggable },
-  props: {
-    /** 
-     * Holds the main data list to distribute.
-    */
-    originalData: {
-      type: Array,
-      required: true
-    },
-
-    /** 
-     * Holds the drop buckets.
-    */
-    dropzones: {
-      type: Array,
-      required: true
-    },
-
-    /** 
-     * Title for the original list.
-    */
-    originalTitle:{
-      type: String,
-      required: false,
-      default: 'Original List'
-    },
-
-    /** 
-     * Title for the drop buckets.
-    */
-    dropzonesTitle: {
-      type: String,
-      required: false,
-      default: 'Distribution data'
-    },
-
-    /** 
-     * Error Message to give. 
-    */
-    errorMessage: {
-      type: String,
-      required: false,
-      default: 'All the original list have not been dragged to appropriate containers yet. Please do so and try again. '
-    }
-  },
+  props: RequiredProps,
 
   data: function () {
     return {
       items:[],
       dropGroups: [],
-      notifyError: false,
     }
   },
 
   created() {
-    this.originalData.forEach(ele => {
-      let item = {
-        id: ele,
-        data: ele
-      };
-
-      this.items.push(item);
-    });
-
-    this.dropGroups = _.cloneDeep(this.dropzones);
+    if (this.inPlace) {
+      this.items = this.originalData;
+      this.dropGroups = this.dropzones;
+    }
+    else {
+      this.items = _.cloneDeep(this.originalData);
+      this.dropGroups = _.cloneDeep(this.dropzones);
+    }
   },
 
   methods: {
@@ -156,15 +112,15 @@ export default {
     */
     onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        
-        if (dropResult.addedIndex !== null){
-          let found = this.dropGroups.filter(p => p.name === columnId)[0];
-          found.children.splice(dropResult.addedIndex, 0, dropResult.payload)
-        }
 
         if(dropResult.removedIndex !== null){
           let found = this.dropGroups.filter(p => p.name === columnId)[0];
           found.children.splice(dropResult.removedIndex, 1);
+        }
+
+        if (dropResult.addedIndex !== null){
+          let found = this.dropGroups.filter(p => p.name === columnId)[0];
+          found.children.splice(dropResult.addedIndex, 0, dropResult.payload);
         }
       }
     },
@@ -196,7 +152,7 @@ export default {
     },
 
     /** 
-     * Applies the dragging result. It removes the item from original list and keeps it in new new list.
+     * Applies the dragging result. It removes the item from original bucket and keeps it in new new list.
      * @param {Array} arr Holds the array.
      * @param {Object} dragResult Holds the drag information.
      * @returns the new corrected list.
@@ -220,28 +176,19 @@ export default {
       return result;
     },
 
-    validateIfOriginalEmpty(){
-      return this.items && this.items.length === 0;
-    },
-
     /** 
      * Runs when save button is clicked. It first validates if all the items from the original list is empty.
      * @public
     */
     saveClicked() {
-      let validated = this.validateIfOriginalEmpty();
-      
-      if(validated){
-        /** 
-         * @event save Emits when save is clicked so that the parent component can appropriately handle it.
-         * @type {Object} 
-        */
-        this.$emit('save',this.dropGroups);
-        this.notifyError = false;
-      }
-      else {
-        this.notifyError = true;
-      }
+      /** 
+       * @event save Emits when save is clicked so that the parent component can appropriately handle it.
+       * @type {Object} 
+      */
+      this.$emit('save', {
+        dropzones: this.dropGroups,
+        originalBucket: this.items
+      });
     },
 
     cancelClicked() {
@@ -274,6 +221,7 @@ export default {
   width: 210px;
   padding: 10px;
   margin: 5px;
+  min-height: 5em;
   margin-right: 10px;
   white-space: normal;
   background-color: #f3f3f3;
@@ -283,7 +231,6 @@ export default {
 .card{
   margin: 5px;
   width: 200px;
-  /* border: 1px solid #ccc; */
   background-color: white;
   box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
   padding: 10px;

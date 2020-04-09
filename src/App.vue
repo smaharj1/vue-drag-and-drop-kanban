@@ -1,61 +1,87 @@
 <template>
   <div id="app">
+    <div class="dd-info">
+      <i>All the cards displayed below are Vue Slots and can be totally customized to be any way</i>
+      <br/>
+      <br/>
+    </div>
+    
     <drag-drop
       :dropzones="dropGroups"
-      :dropzonesTitle="'Drop Zone'"
-      :originalData="ajaxResult"
-      :originalTitle="'Original Data To Be distributed'"
+      :dropzonesTitle="'XYZ Company Teams'"
+      :originalData="stories"
+      :originalTitle="'Tasks to be distributed'"
+      :inPlace="true"
+      :enableSave="true"
+      :enableCancel="true"
       @save="save"
-    ></drag-drop>
+      @cancel="cancel"
+    >
+      <template #dd-card="{ cardData }">
+        <custom-card
+          :data="cardData"
+          @done="doneMarked"
+        />
+      </template>
+    </drag-drop>
   </div>
 </template>
 
 <script>
 /* istanbul ignore file */
-import DragDrop from './vue-drag-n-drop.vue'
+import DragDrop from './vue-drag-n-drop.vue';
+import CustomCard from './components/CustomCard.vue';
 
 export default {
   name: 'app',
   components: {
-    DragDrop
+    DragDrop,
+    CustomCard
   },
   data() {
     return{
-      ajaxResult: [
-        'Luka Modrić',
-        'Mario Mandžukić',
-        'Ivan Rakitić',
-        'Harry Kane',
-        'Raheem Stirling',
-        'Its coming home',
-        'Neymar',
-        'Kylian Mbappé',
-        'Antoine Griezmann'
+      stories: [
+        {
+          title: 'Strategy 101',
+          description: 'Create a draft of business plan',
+          time: '3 days',
+          done: false
+        },
+        {
+          title: 'Strategy 102',
+          description: 'Finalize the plan',
+          time: '4 days',
+          done: false
+        },
+        {
+          title: 'Tech diagram',
+          description: 'Draw the tech data',
+          time: '4 days',
+          done: false
+        },
+        {
+          title: 'Place Holder',
+          description: 'Data Science Team',
+          time: '5 days',
+          done: false
+        }
       ],
 
       dropGroups: [
         {
-          name: 'England',
+          name: 'Business Team',
           children: []
         },
         {
-          name: 'Croatia',
+          name: 'Tech Dept',
           children: []
         },
         {
-          name: 'Brasil',
+          name: 'Marketing Dept',
           children: []
         },
         {
-          name: 'France',
-          children: []
-        },
-        {
-          name: "Belgium",
-          children: []
-        },
-        {
-          name: "USA",
+          name: 'Accounting Dept',
           children: []
         }
       ]
@@ -65,6 +91,15 @@ export default {
   methods:{
     save(received){
       console.log("Received:", received)
+    },
+
+    doneMarked(data) {
+      data.done = true;
+      alert(data.title);
+    },
+
+    cancel() {
+
     }
   }
 }
