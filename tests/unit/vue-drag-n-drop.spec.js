@@ -13,6 +13,7 @@ describe('vue-drag-n-drop.vue', () => {
         'item2',
         'item3'
       ],
+      inPlace: false,
       dropzones: [
         {
           name: 'Zone1',
@@ -31,7 +32,6 @@ describe('vue-drag-n-drop.vue', () => {
         }
       ]
     };
-
 
     wrapper = shallowMount(DragDrop, {
       propsData: props,
@@ -55,45 +55,19 @@ describe('vue-drag-n-drop.vue', () => {
     expect(wrapper.props().errorMessage).toContain('All the original list have not been dragged to appropriate containers yet. Please do so and try again.');
   });
 
-  it('deep clones the dropzones', () => {
+  it('deep clones the dropzones when inplace is false', () => {
     expect(_.cloneDeep).toHaveBeenCalledWith(wrapper.props().dropzones);
   });
 
   it('runs the validation of original list and emits save event on valid data on save click', () => {
-    wrapper.vm.validateIfOriginalEmpty = jest.fn().mockReturnValue(true);
     wrapper.find('button.save').trigger('click');
 
-    expect(wrapper.vm.validateIfOriginalEmpty).toHaveBeenCalled();
-    expect(wrapper.vm.notifyError).toBe(false);
     expect(wrapper.emitted().save).toBeTruthy();
-
-    // ------------
-    // Tests if the validateIfOriginalEmpty() sends true/false
-    wrapper.vm.validateIfOriginalEmpty = jest.fn().mockReturnValue(false);
-    wrapper.find('button.save').trigger('click');
-    expect(wrapper.vm.validateIfOriginalEmpty).toHaveBeenCalled();
-    expect(wrapper.vm.notifyError).toBe(true);
   });
 
   it('emits cancel when cancel button is clicked', () => {
     wrapper.find('button.cancel').trigger('click');
     expect(wrapper.emitted().cancel).toBeTruthy();
-  })
-
-  it('validates if items list is empty or not', () => {
-    wrapper.setData({
-      items: []
-    });
-
-    let returned = wrapper.vm.validateIfOriginalEmpty();
-    expect(returned).toBe(true);
-
-    wrapper.setData({
-      items: ['sdf']
-    });
-
-    returned = wrapper.vm.validateIfOriginalEmpty();
-    expect(returned).toBe(false);
   });
 
   it('gets the card payload when the card payload is requested', () => {
