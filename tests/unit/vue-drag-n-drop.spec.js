@@ -51,10 +51,6 @@ describe('vue-drag-n-drop.vue', () => {
     expect(wrapper.props().dropzonesTitle).toEqual('Distribution data');
   });
 
-  it('provides default dropzone title if not in props', () => {
-    expect(wrapper.props().errorMessage).toContain('All the original list have not been dragged to appropriate containers yet. Please do so and try again.');
-  });
-
   it('deep clones the dropzones when inplace is false', () => {
     expect(_.cloneDeep).toHaveBeenCalledWith(wrapper.props().dropzones);
   });
