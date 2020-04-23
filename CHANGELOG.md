@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased - Breaking Update]
+## [Unreleased]
+### Changed
+- Changed the css class name to be more specific to the component
+- Changed the css value to make the cards not tilt
+- Changed the original container to scroll vertically rather than horizontally.
+- Bug fix: When everything from original bucket was moved to dropzones, original used to collapse. Now, it doesnt and the user can move the cards back to original.
+
+## [1.0.0](https://github.com/smaharj1/vue-drag-and-drop-kanban/releases/tag/v1.0.0) - 2020-04-10
 ### Added
 - Added new props
   - **inPlace**: makes in place changes to props dropzones. Enabled by default

@@ -187,6 +187,29 @@ When you pass your own objects instead of a list of string, you also need to pro
 
 Here, `dd-card` is the slot name. The component provides a `cardData` variable provides the access of a single object from the original data. If slots aren't used, the component assumes that original data is a list of string. This makes it compatible with older version.
 
+
+#### CSS Modification
+
+To modify the CSS style, you can override these css classes from your component:
+
+```
+.vue-drag-n-drop # This holds the whole container. 
+
+  .dd-title  # Class for modifying the titles
+
+  .dd-first-group # Class to modify the first (original) container. It holds the list of 
+                    cards
+
+    .dd-card-ghost  # Class provided for drag class by smooth-dnd
+
+    .dd-card-ghost-drop   # Class provided for drop by smooth-dnd
+
+  .dd-result-group   # Class to modify the second drop container (Result container)
+
+    .dd-drop-container   # Class to modify the style of each column for second container
+
+```
+
 ## Contributions
 Feel free to raise an issue or create a Pull Request if you see ways that can improve this library.
 
