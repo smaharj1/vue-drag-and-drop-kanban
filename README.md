@@ -190,6 +190,9 @@ Here, `dd-card` is the slot name. The component provides a `cardData` variable p
 ## Contributions
 Feel free to raise an issue or create a Pull Request if you see ways that can improve this library.
 
+## Current Contributors
+[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/0)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/0)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/1)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/1)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/2)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/2)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/3)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/3)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/4)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/4)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/5)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/5)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/6)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/6)[![](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/images/7)](https://sourcerer.io/fame/smaharj1/smaharj1/vue-drag-and-drop-kanban/links/7)
+
 ## License
 [MIT](https://opensource.org/licenses/MIT)
 
