@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <h2>
+  <div class="vue-drag-n-drop">
+    <h2 class="dd-title">
       {{originalTitle}}
     </h2>
-    <div class="result-group"> 
+    <div class="dd-first-group"> 
         <Container 
           @drop="onDrop" 
           group-name="col"
           :orientation="'horizontal'"
           :get-child-payload="getOriginalCardPayload()"
-          drag-class="card-ghost"
-          drop-class="card-ghost-drop">
+          drag-class="dd-card-ghost"
+          drop-class="dd-card-ghost-drop">
           <Draggable v-for="(item, iind) in items" :key="iind">
             <slot name="dd-card" v-bind:cardData="item">
               <div class="card">
@@ -23,22 +23,21 @@
         </Container>
     </div>
     <hr>
-    <h2>
+    <h2 class="dd-title">
       {{dropzonesTitle}}
     </h2>
-    <div class="result-group">
-      
+    <div class="dd-result-group">
       <div 
         v-for="(item,ind) in dropGroups"
         v-bind:key="ind"
-        class="card-container">
+        class="dd-drop-container">
         {{item.name}}
         <Container 
           group-name="col"
           @drop="(e) => onCardDrop(item.name, e)"
           :get-child-payload="getCardPayload(item.name)"
-          drag-class="card-ghost"
-          drop-class="card-ghost-drop"
+          drag-class="dd-card-ghost"
+          drop-class="dd-card-ghost-drop"
         >
           <Draggable v-for="(card, cid) in item.children" :key="cid">
             <slot name="dd-card" v-bind:cardData="card">
@@ -54,11 +53,11 @@
       </div>
     </div>
 
-    <div class="drop-actions" v-if="enableSave || enableCancel">
-      <button class="button save" v-if="enableSave" @click="saveClicked()">
+    <div class="dd-drop-actions" v-if="enableSave || enableCancel">
+      <button class="button dd-save" v-if="enableSave" @click="saveClicked()">
         Save
       </button>
-      <button class="button cancel" v-if="enableCancel" @click="cancelClicked()">
+      <button class="button dd-cancel" v-if="enableCancel" @click="cancelClicked()">
         Cancel
       </button>
     </div>
@@ -203,19 +202,7 @@ export default {
 
 <style>
 
-
-.draggable-item-horizontal{
-    padding: 10px;
-    text-align: center;
-    /* width : 200px; */
-    display: block;
-    background-color: #fff;
-    outline: 0;
-    border: 1px solid rgba(0,0,0,.125);
-    margin-right: 4px;
-}
-
-.card-container{
+.dd-drop-container{
   display: inline-block;
   vertical-align: top;
   width: 210px;
@@ -236,32 +223,27 @@ export default {
   padding: 10px;
 }
 
-.card-ghost {
-  transition: transform 0.18s ease;
-  transform: rotateZ(5deg)
-}
-
-.card-ghost-drop{
-  transition: transform 0.18s ease-in-out;
-  transform: rotateZ(0deg)
-}
-
-.drag-drop{
-  width: 80%;
-  margin: auto;
-}
-
-.result-group {
-  overflow-x: auto;
+.dd-result-group {
+  overflow: auto;
   white-space: nowrap;
 }
 
-.drop-actions{
+.dd-first-group {
+  overflow-y: auto;
+  max-height: 200px;
+}
+
+.dd-first-group > .smooth-dnd-container {
+  min-height: 100px;
+  white-space: unset;
+}
+
+.dd-drop-actions{
   text-align: center;
   margin: 10px 0px;
 }
 
-.drop-actions button
+.dd-drop-actions button
 {
   margin-right: 10px;
   padding: 10px;
@@ -269,17 +251,10 @@ export default {
   border-radius: 5px;
 }
 
-.save{
+.dd-save{
   background: #5cdb95 !important;
   border: none;
 
-}
-.error-original{
-  background: #FF3860;
-  color: white;
-  border-left: 5px solid #9E001D;
-  padding: 20px;
-  margin: 10px 0px;
 }
 
 </style>
