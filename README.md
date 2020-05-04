@@ -34,6 +34,8 @@ yarn add vue-drag-n-drop
       :inPlace="true"
       :enableSave="true"
       :enableCancel="true"
+      @dropInOriginalBucket="originalBucketDropEvent"
+      @dropInDestinationBucket="destinationBucketDropEvent"
       @save="save"
       @cancel="cancel"
     >
@@ -165,6 +167,30 @@ To put the component in your code, you can simply run `import DragDrop from 'vue
 ```
 
 When you pass your own objects instead of a list of string, you also need to provide a custom component to handle view/action of this object since you can virtually pass any kind of object. 
+
+#### Events
+When you use the component, you can also listen to some events that happen inside the component like drag, drop, save and cancel
+
+```html
+<drag-drop
+  :dropzones="dropGroups"
+  :dropzonesTitle="'XYZ Company Teams'"
+  :originalData="stories"
+  :originalTitle="'Tasks to be distributed'"
+  @dropInOriginalBucket="originalBucketDropEvent"
+  @dropInDestinationBucket="destinationBucketDropEvent"
+  @save="save"
+  @cancel="cancel"
+/>
+```
+
+`save` - This event is triggered when you click save from inside the component. It gives back the final state of the data in corresponding buckets.
+
+`cancel` - This gives you a choice on how to handle the cancellationn event.
+
+`dropInOriginalBucket` - This event is emitted everytime there is a drop event for original bucket. You provides an object with `startIndex`, `endIndex` and `payload`.
+
+`dropInDestinationBucket` - This event is emitted for each dropzone in the destination bucket. First parameter returns the dropzone name and second parameter returns the drop info `startIndex`, `endIndex` and `payload`.
 
 #### Custom Component for list of objects
 `vue-drag-n-drop` uses Vue Named Slots. So, the users can pass in custom component that will have access to the data for the single item. You can impolement the slots like below:

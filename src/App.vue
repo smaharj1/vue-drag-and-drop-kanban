@@ -14,6 +14,8 @@
       :inPlace="true"
       :enableSave="true"
       :enableCancel="true"
+      @dropInOriginalBucket="originalBucketDropEvent"
+      @dropInDestinationBucket="destinationBucketDropEvent"
       @save="save"
       @cancel="cancel"
     >
@@ -98,8 +100,16 @@ export default {
       alert(data.title);
     },
 
-    cancel() {
+    originalBucketDropEvent(result) {
+      console.log("Original: ", result);
+    },
 
+    destinationBucketDropEvent(columnName, result) {
+      console.log("Destination: ", columnName, result)
+    },
+
+    cancel() {
+      console.log("Cancel hit");
     }
   }
 }
