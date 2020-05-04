@@ -1,6 +1,6 @@
 {
   "name": "vue-drag-n-drop",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": false,
   "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
   "scripts": {
