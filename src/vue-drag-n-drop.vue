@@ -257,7 +257,12 @@ export default {
 .dd-save{
   background: #5cdb95 !important;
   border: none;
+  cursor: pointer;
+}
 
+.dd-cancel {
+  border: none;
+  cursor: pointer;
 }
 
 </style>
