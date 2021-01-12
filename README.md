@@ -243,6 +243,28 @@ To modify the CSS style, you can override these css classes from your component:
 
 ```
 
+## Support for SSR/Nuxt
+Currently, Server Side Rendering is **not** supported. To use it in SSR/Nuxt project, you need to specify Nuxt that this plugin needs to render on the client side.
+
+To specify Nuxt to render it on client-side, create a JS file under `~/plugins/` or add to existing one:
+
+`~/plugins/vue-drap-n-drop.js`
+```
+import Vue from 'vue';
+import DragDrop from 'vue-drag-n-drop';
+
+Vue.use(DragDrop);
+```
+
+Add the plugin to `nuxt.config.js`
+```
+plugins: [
+  {
+    src: './plugins/vue-drag-n-drop.js',
+    ssr: false
+  }
+],
+  ```
 ## Contributions
 Feel free to raise an issue or create a Pull Request if you see ways that can improve this library.
 
