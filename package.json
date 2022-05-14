@@ -1,6 +1,6 @@
 {
   "name": "vue-drag-n-drop",
-  "version": "1.3.0-alpha",
+  "version": "1.3.0-beta",
   "private": false,
   "description": "A simple kanban board where the items can be dragged and dropped from the list. This is a hybrid implementation of vue-smooth-dnd.",
   "scripts": {
@@ -13,7 +13,7 @@
     "build-library" : "vue-cli-service build --target lib --name vue-drag-n-drop ./src/install.js"
   },
   "sideEffects": false,
-  "main": "dist/vue-drag-n-drop.common.js",
+  "main": "dist/vue-drag-n-drop.umd.js",
   "files": [
     "dist/*"
   ],
